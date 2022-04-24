@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -12,9 +14,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@+skln!k_y95!9q*k)(6w-equw0xj(i-#6$h40jfet38v-t-!c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'still-beach-03414.herokuapp.com']
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'rest_framework',
     'mathfilters',
+    'whitenoise.runserver_nostatic'
 
     #delete old image when update
     #django_cleanup should be placed last in INSTALLED_APPS
@@ -56,7 +59,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'conf.urls'
 
@@ -81,17 +87,8 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'goodreads',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-        'USER': 'postgres',
-        'PASSWORD': '1202'
-    }
-}
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES=['default'].update(db_from_env)
 
 
 # Password validation
@@ -148,9 +145,8 @@ AUTH_USER_MODEL = 'users.CustomUserModel' #users ni ichidagi models.py da yaratg
 
 #Quyidagilar image bilan ishlash uchun
 
-MEDIA_URL = "/media/"
-#image larni upload qilsak shu yerga tushadi. Ya'ni, media_files degan folderga
-MEDIA_ROOT = "media_files"
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
 
 # Email
