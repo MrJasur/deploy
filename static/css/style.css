@@ -1,0 +1,149 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* carousel */
+.carousel_rasm{
+    height: 600px; 
+    object-fit: cover;
+}
+
+/* Profile.html */
+.profile_image{
+    object-fit: cover;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    margin-left: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* detail.html */
+.cover_picture{
+    height: 200px;
+}
+
+/* List.html */
+
+.imgs{
+    background-color: white;
+    height: 320px;
+    width: 270px;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.img{
+    width: 200px;
+    display: inline-block;
+}
+
+.rasm{
+    object-fit: contain;
+    width: 200px;
+    height: 250px;
+}
+
+.description{
+    margin-left: 4rem;
+}
+
+.description a{
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+/* book_detail */
+.review-profile__picture{
+    object-fit: cover;
+    width: 75px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.review-profile__comment{
+    padding-top: 0.5rem !important;
+}
+
+.review-profile__comment h3{
+    font-size: 20px
+}
+
+.line{
+    height: 5px;
+    width: auto;
+    border: 3px solid #0D6EFD;
+    margin-bottom: 2rem;
+}
+
+/* home */
+.home_page{
+    display: flex;
+  justify-content: center;
+}
+
+.posts-content{
+    margin-top:20px;    
+}
+.ui-w-40 {
+    width: 40px !important;
+    height: auto;
+}
+.default-style .ui-bordered {
+    border: 1px solid rgba(24,28,33,0.06);
+}
+.ui-bg-cover {
+    background-color: transparent;
+    background-position: center center;
+    background-size: cover;
+}
+.ui-rect {
+    padding-top: 50% !important;
+}
+.ui-rect, .ui-rect-30, .ui-rect-60, .ui-rect-67, .ui-rect-75 {
+    position: relative !important;
+    display: block !important;
+    padding-top: 100% !important;
+    width: 100% !important;
+}
+.d-flex, .d-inline-flex, .media, .media>:not(.media-body), .jumbotron, .card {
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+}
+.bg-dark {
+    background-color: rgba(24,28,33,0.9) !important;
+}
+.card-footer, .card hr {
+    border-color: rgba(24,28,33,0.06);
+}
+.ui-rect-content {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+}
+.default-style .ui-bordered {
+    border: 1px solid rgba(24,28,33,0.06);
+}
+
+
+
+.home_profile_image{
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.home_book_image{
+    object-fit: cover;
+    width: 175px;
+    height: 275px;
+    border-radius: 8px;
+}
+

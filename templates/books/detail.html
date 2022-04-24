@@ -1,0 +1,74 @@
+{%extends 'base.html'%}
+{%load crispy_forms_tags%}
+{% load mathfilters %}
+
+
+{%block title%}
+    Detail pagee
+{%endblock title%}
+
+{%block content%}
+<div class="mt-4 container">
+    
+    <div class="row">
+        <div class="col-2">
+            <img class="cover_picture" src={{book.cover_pic.url}} alt="Cover image">
+        </div>
+        <div class="col-6 mt-2">
+            <h3>{{book.title}}</h3>
+                <span class="fst-italic fw-lighter">
+                    <b>Authored by </b>
+                    {% for x in book.bookauthor_set.all %}
+                    <!-- Pastdagi forloop, agar authorlar soni 1 ta bolsa, 1-qator, 2 ta bolsa 2-qator ishlaydi -->
+                        {%if forloop.last%}     
+                            {{x.author.full_name}}
+                        {%else%}
+                            {{x.author.full_name}},
+                        {%endif%}
+                    {% endfor %}
+                </span>
+            <p>{{book.description}}</p>
+            <p>Isbn: {{book.isbn}}</p>
+        </div>
+    </div>
+
+    
+<!-- Book review -->
+    <div class="row">
+        <div class="col-6">
+            <form action="{%url 'books:reviews' book.id%}" method="POST">{%csrf_token%}
+                {{review_form | crispy}}
+
+                <button class="btn btn-success mb-4">Add review</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- comments -->
+    {%if book.bookreview_set.exists%}
+        <h3 class="mt-4">Reviews</h3>
+        <div class="line"></div>
+        {%for x in book_time%}
+            <div class="row mb-4">
+                <div class="col-1">
+                    <img class="review-profile__picture" src="{{x.user.profile_picture.url}}" alt="Cover picture">
+                </div>
+                <div class="col-7 review-profile__comment">
+                    <h3><b>{{x.user.username}}</b> rated it {{ '⭐️' |mul:x.stars_given }} stars</h3>
+                    <span class="fw-lighter fs-6">{{x.created_at}}
+                    {%if x.user == request.user%}
+                        <a href="{%url 'books:edit_review' book.id x.id %}"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{%url 'books:confirm_delete_review' book.id x.id%}"><i class="bi bi-trash"></i></a>
+                    {%endif%}
+                    </span>
+                   
+                    <p>{{x.comment}}</p>
+                </div>
+            </div>
+            <hr>
+        {%endfor%}
+    {%endif%}
+    
+</div>
+{%endblock content%}

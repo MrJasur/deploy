@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+    Book list page
+{%endblock title%}
+
+{%block content%}
+   <div class="mt-4 container">
+    <h1>Books</h1><hr>
+
+    <div class="row mb-3">
+        <div class="col-4">
+            <form action="" method="GET" class="d-flex">
+                <input class="form-control me-3" type="text" placeholder="Search" name="q" value="{{search_query}}">
+
+                <button class="btn btn-success">Search</button>
+            </form>
+        </div>
+    </div>
+
+    
+    {%if page_obj%}
+     
+    {%for x in page_obj.object_list%}  
+        <div class="row">
+            <div class="col-2 mb-4">
+                <div class="imgs">
+                    <div class="img">
+                        <img class="rasm" src="{{x.cover_pic.url}}" alt="Cover picture">
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 description">
+                <a href="{%url 'books:detail' x.id%}">{{x.title}}</a>
+                <p>{{x.description}}</p>
+            </div>
+        </div>
+    {%endfor%}
+    <nav>
+        <ul class="pagination pagination-flush">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">first</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+            {% endif %}
+
+            <li class="page-item active" aria-current="page">
+                <a class="page-link circle circle-md" href="#">{{ page_obj.number }}</a>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last</a></li>
+             {% endif %}
+
+        </ul>
+      </nav>
+    {%else%}
+        No books found.
+    {%endif%}
+   </div>
+
+{%endblock content%}

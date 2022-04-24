@@ -1,0 +1,12 @@
+#Use Celery
+rabbitmq-service start   - Start the RabbitMQ service(in rabbitmq cmd)
+rabbitmq-service stop    - Stop the RabbitMQ service(in rabbitmq cmd)
+rabbitmqctl list_queues   - Navbatbi korish
+celery -A conf worker -l info --pool=solo    - Start celery(in env)
+
+python manage.py shell (in env)
+>>> from conf.celery import debug_task
+>>> debug_task.delay()
+<AsyncResult: a01b7af1-3559-49a6-9f1a-a12b979ee4d5>
+
+«««««««Success! It is working»»»»»»»»
